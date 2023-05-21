@@ -88,4 +88,4 @@ with open(FILE_NAME, 'r') as f:
     
     print(f"The number of visible trees out of all {total_number} trees is: {number_visible}")
 
-# (UNTESTED) SOLUTION: 1851 visible trees out of a total of 9801
+# SOLUTION: 1851 visible trees out of a total of 9801
