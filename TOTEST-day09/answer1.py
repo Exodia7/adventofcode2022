@@ -69,4 +69,5 @@ with open(FILE_NAME, 'r') as f:
     
     print(f"The number of positions visited by the rope tail is {len(positions_visited_by_tail)}")
 
-# (UNTESTED) SOLUTION: The tail visits 9316 positions
+# TRIES:
+# 1) 9316 --> too high
