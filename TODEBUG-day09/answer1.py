@@ -1,5 +1,5 @@
 
-FILE_NAME = "input.txt"
+FILE_NAME = "test.txt"
 
 with open(FILE_NAME, 'r') as f:
     # OPTIONS:
@@ -29,6 +29,8 @@ with open(FILE_NAME, 'r') as f:
         direction = direction.upper()
         amount = int(amount)
         
+        print(f"Performing move #{i}: In direction {direction}, doing {amount} steps")
+        
         # Apply it, one by one
         for j in range(amount):
             # Move the head
@@ -40,18 +42,34 @@ with open(FILE_NAME, 'r') as f:
                 head[0] += 1
             elif direction == "L":
                 head[0] += 1
-        
+            
             # Move the tail if any move is required
             dist_X = abs(head[0] - tail[0])
             dist_Y = abs(head[1] - tail[1])
+            
+            print(f"Step #{j} - ", end="")
             if (dist_X > 1 or dist_Y > 1):
+                print(f"move necessary with head={head} and tail={tail}")
+            
                 # a move is necessary
                 if dist_X == 2:
+                    print("  moving on X")
                     # move horizontally (left or right)
                     tail[0] = (head[0] + tail[0]) // 2
+                    
+                    # if we're not perfectly aligned on Y (i.e. we have a distance of 1), also move on Y, which means we end up in the same row as the head
+                    if dist_Y > 0:
+                        tail[1] = head[1]
                 if dist_Y == 2:
+                    print("  moving on Y")
                     # move vertically (up or down)
                     tail[1] = (head[1] + tail[1]) // 2
+                    
+                    # if we're not perfectly aligned on X (i.e. we have a distance of 1), also move on Y, which means we end up in the same column as the head
+                    if dist_X > 0:
+                        tail[0] = head[0]
+            else:
+                print("No move necessary")
         
             # NOTE: 
             # in both cases, i compute the new position of the tail by taking the average of the two coordinates.
@@ -66,6 +84,7 @@ with open(FILE_NAME, 'r') as f:
         
         i += 1
 
+    print(f"Here the full record of visited positions: \n{positions_visited_by_tail}")
     
     print(f"The number of positions visited by the rope tail is {len(positions_visited_by_tail)}")
 
